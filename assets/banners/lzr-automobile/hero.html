@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1440">
+<title>LZR Automobile — Hero</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700;800;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    width: 1440px;
+    height: 700px;
+    overflow: hidden;
+    background: #060606;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .hero {
+    position: relative;
+    width: 1440px;
+    height: 700px;
+    background: #060606;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  /* ── BACKGROUND LAYERS ── */
+  .bg-gradient {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 55% 70% at 78% 55%, rgba(220,21,21,0.08) 0%, transparent 65%),
+      radial-gradient(ellipse 30% 50% at 15% 30%, rgba(220,21,21,0.04) 0%, transparent 55%),
+      radial-gradient(ellipse 80% 40% at 50% 100%, rgba(220,21,21,0.06) 0%, transparent 50%);
+  }
+
+  .dot-grid {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(255,255,255,0.035) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  /* Red accent line diagonal */
+  .line-red {
+    position: absolute;
+    top: 0; right: 22%;
+    width: 1px; height: 100%;
+    background: linear-gradient(180deg, transparent 0%, rgba(220,21,21,0.35) 35%, rgba(220,21,21,0.15) 65%, transparent 100%);
+  }
+  .line-red-2 {
+    position: absolute;
+    top: 0; right: 28%;
+    width: 1px; height: 100%;
+    background: linear-gradient(180deg, transparent 0%, rgba(220,21,21,0.15) 30%, rgba(220,21,21,0.06) 60%, transparent 100%);
+  }
+
+  /* ── CAR SVG AREA ── */
+  .car-container {
+    position: absolute;
+    right: -40px;
+    bottom: 0;
+    width: 860px;
+    height: 580px;
+  }
+
+  /* Ground glow under car */
+  .ground-glow {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 700px;
+    height: 60px;
+    background: radial-gradient(ellipse 100% 100% at 50% 100%, rgba(220,21,21,0.45) 0%, rgba(220,21,21,0.15) 50%, transparent 80%);
+    filter: blur(12px);
+  }
+
+  /* Ground reflection line */
+  .ground-line {
+    position: absolute;
+    bottom: 42px;
+    left: 20px;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(220,21,21,0.6) 30%, rgba(220,21,21,0.8) 50%, rgba(220,21,21,0.3) 80%, transparent 100%);
+  }
+
+  /* Shadow reflection */
+  .car-shadow {
+    position: absolute;
+    bottom: 18px;
+    left: 60px;
+    width: 680px;
+    height: 30px;
+    background: radial-gradient(ellipse 100% 100% at 50% 50%, rgba(0,0,0,0.7) 0%, transparent 70%);
+    filter: blur(8px);
+  }
+
+  /* ── LEFT CONTENT ── */
+  .content {
+    position: relative;
+    z-index: 10;
+    padding-left: 100px;
+    padding-top: 0;
+    max-width: 640px;
+  }
+
+  /* Logo */
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 52px;
+  }
+  .logo-icon {
+    width: 52px;
+    height: 52px;
+  }
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+  .logo-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: 3px;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  .logo-sub {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 3.5px;
+    color: #666;
+    text-transform: uppercase;
+  }
+
+  /* Badge */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 14px;
+    background: rgba(220,21,21,0.1);
+    border: 1px solid rgba(220,21,21,0.25);
+    border-radius: 4px;
+    margin-bottom: 28px;
+  }
+  .badge-dot {
+    width: 6px; height: 6px;
+    background: #DC1515;
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(220,21,21,0.8);
+  }
+  .badge-text {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 1.8px;
+    color: #F43030;
+    text-transform: uppercase;
+  }
+
+  /* Main title */
+  .title {
+    margin-bottom: 24px;
+    line-height: 0.88;
+  }
+  .title-line1 {
+    display: block;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 108px;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    letter-spacing: -2px;
+  }
+  .title-line2 {
+    display: block;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 108px;
+    text-transform: uppercase;
+    letter-spacing: -2px;
+    background: linear-gradient(90deg, #DC1515 0%, #F43030 60%, #FF4444 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .subtitle {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.7;
+    color: #777;
+    max-width: 420px;
+    margin-bottom: 44px;
+  }
+
+  /* CTA Buttons */
+  .cta-row {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 52px;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 36px;
+    background: #DC1515;
+    color: #FFFFFF;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 0 rgba(100,0,0,0.5), 0 8px 32px rgba(220,21,21,0.35);
+    text-decoration: none;
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 32px;
+    background: transparent;
+    color: #FFFFFF;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.18);
+    text-decoration: none;
+  }
+
+  /* Stats */
+  .stats {
+    display: flex;
+    gap: 0;
+    align-items: center;
+  }
+  .stat {
+    padding: 0 36px 0 0;
+    margin-right: 36px;
+    border-right: 1px solid rgba(255,255,255,0.08);
+  }
+  .stat:last-child { border-right: none; padding-right: 0; margin-right: 0; }
+  .stat-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    font-size: 28px;
+    color: #FFFFFF;
+    display: block;
+    line-height: 1;
+  }
+  .stat-label {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-top: 5px;
+  }
+
+  /* Scroll indicator */
+  .scroll-hint {
+    position: absolute;
+    bottom: 32px;
+    left: 100px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .scroll-line {
+    width: 32px;
+    height: 1px;
+    background: rgba(220,21,21,0.5);
+  }
+  .scroll-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: #444;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+<div class="hero">
+
+  <!-- BACKGROUND -->
+  <div class="bg-gradient"></div>
+  <div class="dot-grid"></div>
+  <div class="line-red"></div>
+  <div class="line-red-2"></div>
+
+  <!-- LEFT CONTENT -->
+  <div class="content">
+
+    <!-- Logo -->
+    <div class="logo">
+      <svg class="logo-icon" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Car body silhouette red -->
+        <rect width="52" height="52" rx="8" fill="#0F0F0F"/>
+        <!-- Car SVG mini -->
+        <path d="M6 32 L10 24 L16 20 L36 20 L44 24 L46 32 L6 32Z" fill="#DC1515"/>
+        <path d="M14 20 L18 14 L34 14 L38 20Z" fill="#B91010"/>
+        <!-- Wheels -->
+        <circle cx="14" cy="33" r="4" fill="#1A1A1A" stroke="#DC1515" stroke-width="1.5"/>
+        <circle cx="38" cy="33" r="4" fill="#1A1A1A" stroke="#DC1515" stroke-width="1.5"/>
+        <!-- Speed lines -->
+        <line x1="2" y1="27" x2="8" y2="27" stroke="rgba(220,21,21,0.4)" stroke-width="1"/>
+        <line x1="2" y1="30" x2="7" y2="30" stroke="rgba(220,21,21,0.25)" stroke-width="1"/>
+      </svg>
+      <div class="logo-text">
+        <span class="logo-name">LZR Automobile</span>
+        <span class="logo-sub">Dealer Auto</span>
+      </div>
+    </div>
+
+    <!-- Badge -->
+    <div class="badge">
+      <div class="badge-dot"></div>
+      <span class="badge-text">Dealer Auto Premium · România</span>
+    </div>
+
+    <!-- Title -->
+    <div class="title">
+      <span class="title-line1">MAȘINI</span>
+      <span class="title-line2">CERTIFICATE</span>
+    </div>
+
+    <!-- Subtitle -->
+    <p class="subtitle">Selectate și verificate de experți. Istoric complet, ITP valabil, garanție și finanțare disponibilă.</p>
+
+    <!-- CTA -->
+    <div class="cta-row">
+      <a href="#" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        Explorează Parcul Auto
+      </a>
+      <a href="#" class="btn-secondary">Contactează-ne</a>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats">
+      <div class="stat">
+        <span class="stat-num">120+</span>
+        <span class="stat-label">Mașini disponibile</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">10+</span>
+        <span class="stat-label">Ani experiență</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">500+</span>
+        <span class="stat-label">Clienți mulțumiți</span>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+
+  <!-- CAR RIGHT SIDE -->
+  <div class="car-container">
+    <div class="car-shadow"></div>
+    <div class="ground-glow"></div>
+    <div class="ground-line"></div>
+
+    <!-- Main car SVG — premium side profile -->
+    <svg viewBox="0 0 820 520" fill="none" xmlns="http://www.w3.org/2000/svg" style="position:absolute;bottom:40px;left:0;width:820px;height:480px">
+
+      <!-- Ground shadow/reflection -->
+      <ellipse cx="410" cy="490" rx="340" ry="18" fill="rgba(0,0,0,0.5)"/>
+
+      <!-- Body main shape -->
+      <path d="M60 340 L80 300 L130 260 L200 230 L280 200 L380 185 L500 185 L600 200 L660 240 L700 280 L720 320 L730 340 L60 340Z"
+            fill="url(#bodyGrad)"/>
+
+      <!-- Roof -->
+      <path d="M200 230 L240 185 L310 158 L420 148 L520 152 L580 175 L620 205 L600 200 L500 185 L380 185 L280 200 L200 230Z"
+            fill="url(#roofGrad)"/>
+
+      <!-- Windshield -->
+      <path d="M205 228 L242 186 L308 160 L415 150 L415 185 L285 200 L205 228Z"
+            fill="rgba(30,50,80,0.7)" stroke="rgba(220,21,21,0.2)" stroke-width="1"/>
+
+      <!-- Rear windshield -->
+      <path d="M415 150 L520 152 L575 172 L615 200 L600 200 L500 185 L415 185 L415 150Z"
+            fill="rgba(20,40,70,0.6)" stroke="rgba(220,21,21,0.15)" stroke-width="1"/>
+
+      <!-- Door lines -->
+      <path d="M270 200 L275 340" stroke="rgba(255,255,255,0.06)" stroke-width="1.5"/>
+      <path d="M415 185 L420 340" stroke="rgba(255,255,255,0.06)" stroke-width="1.5"/>
+      <path d="M560 190 L562 340" stroke="rgba(255,255,255,0.06)" stroke-width="1.5"/>
+
+      <!-- Handle details -->
+      <rect x="340" y="260" width="32" height="6" rx="3" fill="rgba(255,255,255,0.12)"/>
+      <rect x="486" y="260" width="32" height="6" rx="3" fill="rgba(255,255,255,0.12)"/>
+
+      <!-- Front light assembly -->
+      <path d="M680 240 L720 270 L728 310 L718 310 L710 278 L674 252 Z"
+            fill="rgba(255,220,150,0.15)" stroke="rgba(255,200,100,0.3)" stroke-width="1"/>
+      <!-- DRL line front -->
+      <path d="M685 244 L718 268" stroke="rgba(255,210,120,0.8)" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- Front glow -->
+      <ellipse cx="710" cy="280" rx="20" ry="30" fill="rgba(255,200,80,0.06)"/>
+
+      <!-- Rear light assembly -->
+      <path d="M80 300 L60 330 L62 342 L75 342 L95 315 Z"
+            fill="rgba(220,21,21,0.25)" stroke="rgba(220,21,21,0.5)" stroke-width="1"/>
+      <!-- Tail light glow -->
+      <ellipse cx="70" cy="320" rx="18" ry="25" fill="rgba(220,21,21,0.12)"/>
+      <!-- Brake light line -->
+      <path d="M68 302 L64 334" stroke="rgba(220,21,21,0.9)" stroke-width="2" stroke-linecap="round"/>
+
+      <!-- Side mirror -->
+      <path d="M670 228 L690 220 L695 235 L670 238 Z" fill="url(#bodyGrad)" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+
+      <!-- Wheel arches -->
+      <path d="M100 340 Q160 290 220 340Z" fill="url(#archGrad)"/>
+      <path d="M540 340 Q600 290 660 340Z" fill="url(#archGrad)"/>
+
+      <!-- Front bumper -->
+      <path d="M700 320 L730 340 L720 345 L696 345 L700 320Z" fill="url(#frontBumper)"/>
+      <!-- Grille lines -->
+      <line x1="706" y1="325" x2="724" y2="338" stroke="rgba(220,21,21,0.3)" stroke-width="1"/>
+      <line x1="710" y1="322" x2="728" y2="336" stroke="rgba(220,21,21,0.2)" stroke-width="0.8"/>
+
+      <!-- Rear bumper/diffuser -->
+      <path d="M60 340 L55 350 L70 355 L80 345Z" fill="#0A0A0A" stroke="rgba(220,21,21,0.2)" stroke-width="1"/>
+
+      <!-- Side skirt red accent line -->
+      <path d="M115 340 L650 340" stroke="rgba(220,21,21,0.7)" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- Above skirt accent line subtle -->
+      <path d="M130 318 L640 318" stroke="rgba(220,21,21,0.12)" stroke-width="1" stroke-linecap="round"/>
+
+      <!-- WHEELS - Front -->
+      <circle cx="598" cy="365" r="58" fill="#0A0A0A" stroke="#1A1A1A" stroke-width="2"/>
+      <circle cx="598" cy="365" r="50" fill="#080808"/>
+      <!-- Rim spokes front -->
+      <g stroke="rgba(180,180,180,0.7)" stroke-width="2.5" stroke-linecap="round">
+        <line x1="598" y1="320" x2="598" y2="340"/>
+        <line x1="598" y1="390" x2="598" y2="410"/>
+        <line x1="553" y1="365" x2="573" y2="365"/>
+        <line x1="623" y1="365" x2="643" y2="365"/>
+        <line x1="566" y1="333" x2="580" y2="347"/>
+        <line x1="616" y1="383" x2="630" y2="397"/>
+        <line x1="630" y1="333" x2="616" y2="347"/>
+        <line x1="580" y1="383" x2="566" y2="397"/>
+      </g>
+      <circle cx="598" cy="365" r="16" fill="#111" stroke="rgba(220,21,21,0.5)" stroke-width="2"/>
+      <circle cx="598" cy="365" r="8" fill="#DC1515"/>
+      <!-- Wheel glow -->
+      <circle cx="598" cy="365" r="56" fill="none" stroke="rgba(220,21,21,0.15)" stroke-width="1"/>
+
+      <!-- WHEELS - Rear -->
+      <circle cx="168" cy="365" r="58" fill="#0A0A0A" stroke="#1A1A1A" stroke-width="2"/>
+      <circle cx="168" cy="365" r="50" fill="#080808"/>
+      <g stroke="rgba(180,180,180,0.7)" stroke-width="2.5" stroke-linecap="round">
+        <line x1="168" y1="320" x2="168" y2="340"/>
+        <line x1="168" y1="390" x2="168" y2="410"/>
+        <line x1="123" y1="365" x2="143" y2="365"/>
+        <line x1="193" y1="365" x2="213" y2="365"/>
+        <line x1="136" y1="333" x2="150" y2="347"/>
+        <line x1="186" y1="383" x2="200" y2="397"/>
+        <line x1="200" y1="333" x2="186" y2="347"/>
+        <line x1="150" y1="383" x2="136" y2="397"/>
+      </g>
+      <circle cx="168" cy="365" r="16" fill="#111" stroke="rgba(220,21,21,0.5)" stroke-width="2"/>
+      <circle cx="168" cy="365" r="8" fill="#DC1515"/>
+      <circle cx="168" cy="365" r="56" fill="none" stroke="rgba(220,21,21,0.15)" stroke-width="1"/>
+
+      <!-- Red rim light on car top edge -->
+      <path d="M200 230 L280 200 L500 185 L600 200 L660 240" stroke="rgba(220,21,21,0.35)" stroke-width="3" fill="none" stroke-linecap="round" filter="url(#redGlow)"/>
+
+      <!-- Subtle highlight on roof -->
+      <path d="M260 175 L420 150 L530 158 L570 172" stroke="rgba(255,255,255,0.08)" stroke-width="8" stroke-linecap="round"/>
+
+      <!-- Car body top highlight -->
+      <path d="M220 222 L370 192 L500 185 L590 196 L625 212" stroke="rgba(255,255,255,0.05)" stroke-width="12" stroke-linecap="round"/>
+
+      <!-- Gradients & Filters -->
+      <defs>
+        <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:#1E1E1E"/>
+          <stop offset="40%" style="stop-color:#141414"/>
+          <stop offset="100%" style="stop-color:#080808"/>
+        </linearGradient>
+        <linearGradient id="roofGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:#1A1A1A"/>
+          <stop offset="100%" style="stop-color:#101010"/>
+        </linearGradient>
+        <linearGradient id="archGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:#111111"/>
+          <stop offset="100%" style="stop-color:#060606"/>
+        </linearGradient>
+        <linearGradient id="frontBumper" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#1A1A1A"/>
+          <stop offset="100%" style="stop-color:#0A0A0A"/>
+        </linearGradient>
+        <filter id="redGlow">
+          <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+          <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+    </svg>
+  </div><!-- /car-container -->
+
+  <!-- Scroll hint -->
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    <span class="scroll-text">Derulează</span>
+  </div>
+
+</div>
+</body>
+</html>
