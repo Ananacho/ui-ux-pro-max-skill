@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AquaView Titanic — Property CV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --sage:       #8EC5A0;
+    --sage-dark:  #6BA888;
+    --sage-light: #C5E0CF;
+    --sage-50:    #F0F7F3;
+    --teal:       #4ECDC4;
+    --sand:       #C4A882;
+    --sand-light: #EFE5D6;
+    --cream:      #FAF8F5;
+    --charcoal:   #1C1917;
+    --medium:     #44403C;
+    --muted:      #9B9087;
+    --border:     #E8E2DC;
+    --gold:       #C9A84C;
+    --white:      #FFFFFF;
+  }
+
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  html, body {
+    width: 210mm;
+    min-height: 297mm;
+    background: #E8E2DC;
+    font-family: 'Jost', sans-serif;
+  }
+
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    background: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ══════════════════════════════════════════
+     HEADER
+  ══════════════════════════════════════════ */
+  .header {
+    background: var(--charcoal);
+    padding: 28px 36px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--sage) 0%, var(--teal) 50%, var(--sage) 100%);
+  }
+
+  /* Decorative wave bg */
+  .header::before {
+    content: '';
+    position: absolute;
+    right: -40px; top: -40px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    border: 40px solid rgba(142,197,160,0.08);
+  }
+
+  .logo-area { display: flex; flex-direction: column; gap: 2px; }
+
+  .logo-text-aqua {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 32px;
+    color: var(--sage);
+    letter-spacing: -0.5px;
+    line-height: 1;
+  }
+
+  .logo-text-titanic {
+    font-family: 'Jost', sans-serif;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.35em;
+    color: rgba(255,255,255,0.9);
+    text-transform: uppercase;
+    margin-left: 2px;
+  }
+
+  .logo-waves {
+    margin-top: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .logo-waves span {
+    display: block;
+    height: 1.5px;
+    background: var(--sage);
+    border-radius: 999px;
+    opacity: 0.7;
+  }
+
+  .logo-waves span:nth-child(1) { width: 80px; }
+  .logo-waves span:nth-child(2) { width: 60px; opacity: 0.45; }
+
+  .header-right {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .header-tag {
+    font-family: 'Jost', sans-serif;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    color: var(--sage);
+    text-transform: uppercase;
+  }
+
+  .header-doc-type {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(255,255,255,0.85);
+  }
+
+  .header-year {
+    font-family: 'Jost', sans-serif;
+    font-size: 10px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.08em;
+  }
+
+  /* ══════════════════════════════════════════
+     HERO BAND
+  ══════════════════════════════════════════ */
+  .hero-band {
+    background: linear-gradient(135deg, var(--sage-50) 0%, var(--sand-light) 100%);
+    padding: 20px 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-title h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--charcoal);
+    line-height: 1.1;
+  }
+
+  .hero-title h1 em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--sage-dark);
+  }
+
+  .hero-title p {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    background: white;
+  }
+
+  .stat {
+    padding: 10px 16px;
+    text-align: center;
+    border-right: 1px solid var(--border);
+  }
+  .stat:last-child { border-right: none; }
+
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--charcoal);
+    line-height: 1;
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    display: block;
+    margin-top: 2px;
+  }
+
+  /* ══════════════════════════════════════════
+     MAIN CONTENT GRID
+  ══════════════════════════════════════════ */
+  .content {
+    padding: 24px 36px;
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    gap: 24px;
+  }
+
+  /* ══════════════════════════════════════════
+     LEFT COLUMN
+  ══════════════════════════════════════════ */
+  .left-col { display: flex; flex-direction: column; gap: 20px; }
+
+  /* Section label */
+  .section-label {
+    font-family: 'Jost', sans-serif;
+    font-size: 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--sage-dark);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--sage-light);
+  }
+
+  /* Photo mosaic */
+  .photo-mosaic {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 90px 70px;
+    gap: 4px;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .photo-cell {
+    background: var(--sage-50);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .photo-cell img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Placeholder when no image */
+  .photo-cell .ph {
+    width: 100%; height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .photo-cell:first-child {
+    grid-column: 1;
+    grid-row: 1 / 3;
+  }
+
+  .photo-cell.accent {
+    background: linear-gradient(135deg, var(--sage-dark), var(--teal));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 4px;
+    padding: 8px;
+    text-align: center;
+  }
+
+  .photo-cell.accent .accent-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: white;
+    line-height: 1;
+  }
+
+  .photo-cell.accent .accent-label {
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.8);
+  }
+
+  /* Description */
+  .description p {
+    font-size: 10.5px;
+    line-height: 1.75;
+    color: var(--medium);
+    font-weight: 300;
+  }
+
+  .description p + p { margin-top: 8px; }
+
+  /* Amenities grid */
+  .amenities-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+  }
+
+  .amenity-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 8px;
+    background: var(--cream);
+    border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+
+  .amenity-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--sage);
+    flex-shrink: 0;
+  }
+
+  .amenity-text {
+    font-size: 9.5px;
+    color: var(--medium);
+    font-weight: 400;
+  }
+
+  /* Nearby */
+  .nearby-row {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .nearby-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nearby-item:last-child { border-bottom: none; }
+
+  .nearby-name {
+    font-size: 9.5px;
+    color: var(--medium);
+    font-weight: 400;
+  }
+
+  .nearby-dist {
+    font-size: 9px;
+    color: var(--sage-dark);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+
+  /* ══════════════════════════════════════════
+     RIGHT COLUMN (Sidebar)
+  ══════════════════════════════════════════ */
+  .right-col { display: flex; flex-direction: column; gap: 16px; }
+
+  /* Pricing card */
+  .price-card {
+    background: var(--charcoal);
+    border-radius: 12px;
+    padding: 16px;
+    color: white;
+  }
+
+  .price-card-title {
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--sage);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .price-row:last-of-type { border-bottom: none; }
+
+  .price-period {
+    font-size: 9px;
+    color: rgba(255,255,255,0.55);
+    font-weight: 300;
+  }
+
+  .price-amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+  }
+
+  .price-unit {
+    font-size: 8px;
+    color: rgba(255,255,255,0.4);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+  }
+
+  .price-note {
+    margin-top: 10px;
+    font-size: 8px;
+    color: rgba(255,255,255,0.35);
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  /* Rating card */
+  .rating-card {
+    background: var(--sage-50);
+    border-radius: 12px;
+    padding: 14px;
+    border: 1px solid var(--sage-light);
+    text-align: center;
+  }
+
+  .rating-stars {
+    display: flex;
+    justify-content: center;
+    gap: 3px;
+    margin-bottom: 6px;
+  }
+
+  .star {
+    width: 12px; height: 12px;
+    fill: var(--gold);
+  }
+
+  .rating-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--charcoal);
+    line-height: 1;
+    display: block;
+  }
+
+  .rating-sub {
+    font-size: 8.5px;
+    color: var(--muted);
+    margin-top: 3px;
+    display: block;
+  }
+
+  /* Rules card */
+  .rules-card {
+    background: var(--cream);
+    border-radius: 12px;
+    padding: 14px;
+    border: 1px solid var(--border);
+  }
+
+  .rule-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 0;
+  }
+
+  .rule-icon {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .rule-icon.check { background: var(--sage-light); }
+  .rule-icon.cross { background: #FEE2E2; }
+
+  .rule-icon svg { width: 8px; height: 8px; }
+
+  .rule-text {
+    font-size: 9px;
+    color: var(--medium);
+    font-weight: 400;
+  }
+
+  /* Contact card */
+  .contact-card {
+    background: linear-gradient(135deg, var(--sage-dark), var(--teal));
+    border-radius: 12px;
+    padding: 14px;
+  }
+
+  .contact-card-title {
+    font-size: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: rgba(255,255,255,0.7);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 6px;
+  }
+
+  .contact-item:last-child { margin-bottom: 0; }
+
+  .contact-icon {
+    width: 20px; height: 20px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .contact-icon svg { width: 10px; height: 10px; stroke: white; fill: none; }
+
+  .contact-val {
+    font-size: 9.5px;
+    color: white;
+    font-weight: 400;
+  }
+
+  /* ══════════════════════════════════════════
+     HIGHLIGHT STRIP
+  ══════════════════════════════════════════ */
+  .highlight-strip {
+    margin: 0 36px;
+    padding: 12px 20px;
+    background: linear-gradient(90deg, var(--sand-light), var(--sage-50));
+    border-radius: 10px;
+    border: 1px solid var(--sage-light);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hs-icon {
+    width: 32px; height: 32px;
+    background: white;
+    border-radius: 8px;
+    border: 1px solid var(--sage-light);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .hs-icon svg { width: 16px; height: 16px; stroke: var(--sage-dark); fill: none; }
+
+  .hs-text { flex: 1; }
+
+  .hs-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--charcoal);
+    font-style: italic;
+  }
+
+  .hs-sub {
+    font-size: 9px;
+    color: var(--muted);
+    margin-top: 1px;
+    font-weight: 300;
+  }
+
+  .hs-badge {
+    background: var(--sage);
+    color: white;
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  /* ══════════════════════════════════════════
+     FOOTER
+  ══════════════════════════════════════════ */
+  .footer {
+    margin-top: auto;
+    padding: 12px 36px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-left {
+    font-size: 8px;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  .footer-right {
+    text-align: right;
+    font-size: 8px;
+    color: var(--muted);
+    font-weight: 300;
+  }
+
+  .footer-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12px;
+    font-style: italic;
+    color: var(--sage-dark);
+    font-weight: 400;
+  }
+
+  .footer-divider {
+    width: 1px;
+    height: 24px;
+    background: var(--border);
+    margin: 0 16px;
+  }
+
+  /* ══════════════════════════════════════════
+     WATERMARK
+  ══════════════════════════════════════════ */
+  .watermark {
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 80px;
+    font-style: italic;
+    font-weight: 300;
+    color: rgba(142,197,160,0.05);
+    letter-spacing: 0.1em;
+    pointer-events: none;
+    white-space: nowrap;
+    user-select: none;
+  }
+
+  /* ══════════════════════════════════════════
+     PRINT
+  ══════════════════════════════════════════ */
+  @media print {
+    html, body { background: white; }
+    .page { page-break-after: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+  <!-- Watermark -->
+  <div class="watermark">AquaView</div>
+
+  <!-- ── HEADER ── -->
+  <header class="header">
+    <div class="logo-area">
+      <span class="logo-text-aqua">AquaView</span>
+      <span class="logo-text-titanic">Titanic</span>
+      <div class="logo-waves">
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+    <div class="header-right">
+      <span class="header-tag">Property Profile · 2025</span>
+      <span class="header-doc-type">Fișă de proprietate</span>
+      <span class="header-year">Mamaia Nord · Constanța · România</span>
+    </div>
+  </header>
+
+  <!-- ── HERO BAND ── -->
+  <div class="hero-band">
+    <div class="hero-title">
+      <h1>Apartament <em>de lux</em> cu vedere la mare</h1>
+      <p>Titanic Tower · Etaj 12 · Mamaia Nord · 85 m²</p>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">12</span>
+        <span class="stat-label">Etaj</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">85</span>
+        <span class="stat-label">m²</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">2</span>
+        <span class="stat-label">Dormitoare</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">4</span>
+        <span class="stat-label">Persoane</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">200m</span>
+        <span class="stat-label">De la plajă</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── MAIN CONTENT ── -->
+  <div class="content">
+
+    <!-- LEFT COLUMN -->
+    <div class="left-col">
+
+      <!-- Photo Mosaic -->
+      <div>
+        <div class="section-label">Galerie</div>
+        <div class="photo-mosaic">
+          <!-- Cel 1: mare (1×2) -->
+          <div class="photo-cell" style="background: linear-gradient(135deg, #C5E0CF, #8EC5A0);">
+            <div class="ph" style="flex-direction:column; gap:4px;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6BA888" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+              <span style="font-size:8px; color:#6BA888;">Living · Vedere mare</span>
+            </div>
+          </div>
+          <!-- Cel 2 -->
+          <div class="photo-cell" style="background: linear-gradient(135deg, #EFE5D6, #C4A882);">
+            <div class="ph" style="flex-direction:column; gap:4px;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9B9087" stroke-width="1.5"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+              <span style="font-size:8px; color:#9B9087;">Dormitor 1</span>
+            </div>
+          </div>
+          <!-- Cel 3 -->
+          <div class="photo-cell accent">
+            <span class="accent-num">★4.97</span>
+            <span class="accent-label">Rating oaspeți</span>
+          </div>
+          <!-- Cel 4 -->
+          <div class="photo-cell" style="background: linear-gradient(135deg, #D4C4B0, #B8A090);">
+            <div class="ph" style="flex-direction:column; gap:4px;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9B9087" stroke-width="1.5"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+              <span style="font-size:8px; color:#7A7065;">Dormitor 2</span>
+            </div>
+          </div>
+          <!-- Cel 5 -->
+          <div class="photo-cell" style="background: linear-gradient(135deg, #C5E0CF, #4ECDC4);">
+            <div class="ph" style="flex-direction:column; gap:4px;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2E9E96" stroke-width="1.5"><path d="M7 7h10v10H7z"/><path d="M4 4l16 16"/></svg>
+              <span style="font-size:8px; color:#2E9E96;">Baie en-suite</span>
+            </div>
+          </div>
+        </div>
+        <p style="font-size:8px; color:var(--muted); margin-top:5px; font-style:italic; text-align:right;">
+          * Înlocuiți placeholder-urile cu fotografiile furnizate ↑
+        </p>
+      </div>
+
+      <!-- Description -->
+      <div class="description">
+        <div class="section-label">Despre apartament</div>
+        <p>
+          <strong style="font-weight:500; color:var(--charcoal);">AquaView Titanic</strong> este un spațiu care redefinește vacanța la mare.
+          Situat la <strong style="font-weight:500;">etajul 12</strong> al complexului Titanic din Mamaia Nord, fiecare cameră
+          a fost concepută ca un sanctuar al confortului modern — pereți în <strong style="font-weight:500;">marmură italiană</strong>,
+          tapițerie de catifea, iluminare LED ambiantă și o priveliște panoramică spre Marea Neagră
+          care îți taie respirația în fiecare dimineață.
+        </p>
+        <p>
+          Două dormitoare generoase cu paturi <strong style="font-weight:500;">king-size</strong>, living open-space cu ferestre
+          panoramice, baie en-suite cu oglindă LED și duș ploaie. Capacitate: până la
+          <strong style="font-weight:500;">4 persoane</strong>. Perfect pentru cupluri, familie sau un weekend
+          de excepție. Fiecare rezervare include un <em style="color:var(--sage-dark);">welcome kit</em> cu șampanie și preparate locale.
+        </p>
+      </div>
+
+      <!-- Amenities -->
+      <div>
+        <div class="section-label">Dotări incluse</div>
+        <div class="amenities-grid">
+          <div class="amenity-item"><div class="amenity-dot"></div><span class="amenity-text">Vedere panoramică Marea Neagră</span></div>
+          <div class="amenity-item"><div class="amenity-dot"></div><span class="amenity-text">Smart TV 65" Samsung The Frame</span></div>
+          <div class="amenity-item"><div class="amenity-dot"></div><span class="amenity-text">Aer condiționat toate camerele</span></div>
+          <div class="amenity-item"><div class="amenity-dot"></div><span class="amenity-text">WiFi fibră optică 1 Gbps</span></div>
+          <div class="amenity-item"><div class="amenity-dot"></div><span class="amenity-text">Marmură italiană & iluminare LED</span></div>
+          <div class="amenity-item"><div class="amenity-dot"></div><span class="amenity-text">Nespresso + bucătărie echipată</span></div>
+          <div class="amenity-item"><div class="amenity-dot"></div><span class="amenity-text">Baie en-suite cu duș ploaie</span></div>
+          <div class="amenity-item"><div class="amenity-dot"></div><span class="amenity-text">Parcare privată inclusă</span></div>
+          <div class="amenity-item"><div class="amenity-dot"></div><span class="amenity-text">Lenjerie & prosoape hotel 5★</span></div>
+          <div class="amenity-item"><div class="amenity-dot"></div><span class="amenity-text">Acces securizat cod personal</span></div>
+          <div class="amenity-item"><div class="amenity-dot"></div><span class="amenity-text">Welcome kit șampanie + fructe</span></div>
+          <div class="amenity-item"><div class="amenity-dot"></div><span class="amenity-text">Check-in flexibil la cerere</span></div>
+        </div>
+      </div>
+
+      <!-- Nearby -->
+      <div>
+        <div class="section-label">Puncte de interes nearby</div>
+        <div class="nearby-row">
+          <div class="nearby-item">
+            <span class="nearby-name">Plaja Mamaia Nord (liniștită)</span>
+            <span class="nearby-dist">3 min · mers</span>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-name">Club Vox Maris</span>
+            <span class="nearby-dist">8 min · mers</span>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-name">Club Fratelli Beach</span>
+            <span class="nearby-dist">12 min · mers</span>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-name">Restaurante seafood premium</span>
+            <span class="nearby-dist">10 min · mers</span>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-name">Aqua Magic (parc acvatic)</span>
+            <span class="nearby-dist">15 min · auto</span>
+          </div>
+          <div class="nearby-item">
+            <span class="nearby-name">Aeroportul Mihail Kogălniceanu</span>
+            <span class="nearby-dist">30 min · auto</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="right-col">
+
+      <!-- Pricing -->
+      <div class="price-card">
+        <div class="price-card-title">Tarife · Sezon 2025</div>
+        <div class="price-row">
+          <div>
+            <div class="price-period">Mai · Octombrie</div>
+          </div>
+          <div style="text-align:right;">
+            <span class="price-amount">350</span>
+            <span class="price-unit"> RON/noapte</span>
+          </div>
+        </div>
+        <div class="price-row">
+          <div>
+            <div class="price-period">Iunie · Septembrie</div>
+          </div>
+          <div style="text-align:right;">
+            <span class="price-amount">450</span>
+            <span class="price-unit"> RON/noapte</span>
+          </div>
+        </div>
+        <div class="price-row" style="border-bottom: 1px solid rgba(255,255,255,0.08);">
+          <div>
+            <div class="price-period">15 Iulie – 31 August</div>
+          </div>
+          <div style="text-align:right;">
+            <span class="price-amount">650</span>
+            <span class="price-unit"> RON/noapte</span>
+          </div>
+        </div>
+        <div class="price-row">
+          <div>
+            <div class="price-period">Suprataxă weekend</div>
+          </div>
+          <div style="text-align:right;">
+            <span class="price-amount" style="font-size:14px;">+50</span>
+            <span class="price-unit"> RON</span>
+          </div>
+        </div>
+        <p class="price-note">* Toate prețurile includ taxa de curățenie (100 RON/sejur) și toate utilitățile. Minim 2 nopți în sezon.</p>
+      </div>
+
+      <!-- Rating -->
+      <div class="rating-card">
+        <div class="rating-stars">
+          <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg class="star" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <span class="rating-num">4.97</span>
+        <span class="rating-sub">143 recenzii verificate<br>Superhost Airbnb · Google ★</span>
+      </div>
+
+      <!-- Rules -->
+      <div class="rules-card">
+        <div class="section-label" style="margin-bottom:8px;">Reguli</div>
+        <div class="rule-item">
+          <div class="rule-icon check">
+            <svg viewBox="0 0 10 10" fill="none" stroke="#6BA888" stroke-width="1.5"><polyline points="1.5,5 3.5,7.5 8.5,2"/></svg>
+          </div>
+          <span class="rule-text">Check-in: 15:00</span>
+        </div>
+        <div class="rule-item">
+          <div class="rule-icon check">
+            <svg viewBox="0 0 10 10" fill="none" stroke="#6BA888" stroke-width="1.5"><polyline points="1.5,5 3.5,7.5 8.5,2"/></svg>
+          </div>
+          <span class="rule-text">Check-out: 11:00</span>
+        </div>
+        <div class="rule-item">
+          <div class="rule-icon cross">
+            <svg viewBox="0 0 10 10" fill="none" stroke="#DC2626" stroke-width="1.5"><line x1="2" y1="2" x2="8" y2="8"/><line x1="8" y1="2" x2="2" y2="8"/></svg>
+          </div>
+          <span class="rule-text">Nefumători</span>
+        </div>
+        <div class="rule-item">
+          <div class="rule-icon cross">
+            <svg viewBox="0 0 10 10" fill="none" stroke="#DC2626" stroke-width="1.5"><line x1="2" y1="2" x2="8" y2="8"/><line x1="8" y1="2" x2="2" y2="8"/></svg>
+          </div>
+          <span class="rule-text">Fără animale</span>
+        </div>
+        <div class="rule-item">
+          <div class="rule-icon check">
+            <svg viewBox="0 0 10 10" fill="none" stroke="#6BA888" stroke-width="1.5"><polyline points="1.5,5 3.5,7.5 8.5,2"/></svg>
+          </div>
+          <span class="rule-text">Anulare gratuită -7 zile</span>
+        </div>
+        <div class="rule-item">
+          <div class="rule-icon check">
+            <svg viewBox="0 0 10 10" fill="none" stroke="#6BA888" stroke-width="1.5"><polyline points="1.5,5 3.5,7.5 8.5,2"/></svg>
+          </div>
+          <span class="rule-text">Plată card / transfer</span>
+        </div>
+      </div>
+
+      <!-- Contact -->
+      <div class="contact-card">
+        <div class="contact-card-title">Rezervări & Contact</div>
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          </div>
+          <span class="contact-val">+40 740 XXX XXX</span>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          </div>
+          <span class="contact-val">WhatsApp disponibil</span>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <span class="contact-val">rezervari@aquaview<br>titanic.ro</span>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </div>
+          <span class="contact-val">@aquaview.titanic</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── HIGHLIGHT STRIP ── -->
+  <div class="highlight-strip">
+    <div class="hs-icon">
+      <svg viewBox="0 0 24 24" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    </div>
+    <div class="hs-text">
+      <div class="hs-title">Welcome kit inclus în fiecare rezervare — șampanie, fructe & preparate locale</div>
+      <div class="hs-sub">Mic-dejun la cerere · Transfer aeroport disponibil · Concierge 9:00–21:00</div>
+    </div>
+    <div class="hs-badge">Superhost ★</div>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <footer class="footer">
+    <div class="footer-left">
+      <strong style="color:var(--charcoal); font-weight:500;">AquaView Titanic</strong> · Mamaia Nord, Constanța<br>
+      aquaviewtitanic.ro · rezervari@aquaviewtitanic.ro · +40 740 XXX XXX
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-right">
+      <span class="footer-brand">AquaView</span><br>
+      <span style="font-size:7px; letter-spacing:0.08em; text-transform:uppercase; color:var(--muted);">
+        Property Profile · Sezon 2025
+      </span>
+    </div>
+  </footer>
+
+</div>
+
+</body>
+</html>
